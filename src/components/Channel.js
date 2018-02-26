@@ -10,8 +10,7 @@ class Channel extends React.Component {
 
 
     handleClick = (event) => {
-        this.props.changeData(this.state.channel, 'channel');
-        this.props.changeData(this.state.user, 'user');
+        window.location = `/${this.state.channel}?${this.state.user}`;
         event.preventDefault();
 
     };
@@ -23,15 +22,30 @@ class Channel extends React.Component {
 
     render() {
         return (
-            <div className='login-box'>
-                <h1>The Stage</h1>
-                <img src={`/images/microscope-badge-200.gif`} alt='' style={{maxWidth: '225px'}}/>
-                <div><input value={this.state.channel} name='channel' placeholder='Channel Name' onChange={this.handleChange}/></div>
-                <div><input value={this.state.user} name='user' placeholder='User Name' onChange={this.handleChange}/></div>
-                <div><input type='submit' value='Enter' onClick={this.handleClick}/></div>
+            <div className='container'>
+                <div className='row justify-content-center'>
+                    <h1>The Stage</h1>
+                </div>
+                <div className='row justify-content-center my-3'>
+                    <img src={`/images/microscope-badge-200.gif`} alt='' />
+                </div>
+                <div className='row justify-content-center my-3'>
+                    <input value={this.state.channel} name='channel'
+                           placeholder='Channel Name'
+                           onChange={this.handleChange}/>
+                </div>
+                <div className='row justify-content-center my-3'>
+                    <input value={this.state.user} name='user'
+                           placeholder='User Name'
+                           onChange={this.handleChange}/>
+                </div>
+                <div className='row justify-content-center my-3'>
+                    <input type='submit' value='Enter'
+                           onClick={this.handleClick}/>
+                </div>
                 <About/>
             </div>
-        );
+        )
     }
 }
 

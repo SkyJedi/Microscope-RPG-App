@@ -6,10 +6,7 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import allReducers from './reducers';
 import {App} from './components/index';
-
-require('./styles/index.css');
-require('./styles/popup.css');
-require('./styles/tabs.css');
+require('bootstrap/dist/css/bootstrap.css');
 
 export const store = createStore(allReducers, {}, applyMiddleware(thunk));
 

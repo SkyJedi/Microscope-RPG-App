@@ -2,22 +2,27 @@
   "name": "microscope-rpg-app",
   "version": "1.0.0",
   "description": "App to track timelines for Microscpoe RPG",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkyJedi/Microscope-RPG-App.git"
+  },
   "main": "index.js",
   "author": "SkyJedi",
   "license": "GPL-3.0",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "firebase": "^4.10.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-popup": "^0.9.2",
     "react-redux": "^5.0.7",
     "react-scripts": "^1.1.1",
+    "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
-
   }
 }

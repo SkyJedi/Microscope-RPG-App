@@ -5,26 +5,23 @@ import {changeData} from '../actions';
 import {Channel, MainPage} from "./index";
 
 class App extends React.Component {
-    state = {loading: true};
 
     componentWillMount() {
-        const {changeData} = this.props;
-
         if (window.location.pathname !== '/') {
-            changeData(window.location.pathname.slice(1).toLowerCase(), 'channel');
+            this.props.changeData(window.location.pathname.slice(1).toLowerCase(), 'channel');
         }
-        if (this.props.channel) {
-        } else {
+        if (window.location.search !== '?') {
+            this.props.changeData(window.location.search.slice(1), 'user');
         }
     }
 
     render() {
         return (
-            <div className='App'>
+            <div className='container'>
                 {this.props.channel === null ? <Channel /> : <MainPage />}
             </div>
 
-        );
+        )
     }
 }
 

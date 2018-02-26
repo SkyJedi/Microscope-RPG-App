@@ -7,3 +7,8 @@ export const user = (state = null, action) =>{
     if (action.type === 'user_Changed')  return action.payload;
     return state;
 };
+
+export const period = (state = null, action) =>{
+    if (action.type === 'period_Changed')  return action.payload;
+    return state;
+};

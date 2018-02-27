@@ -3,6 +3,7 @@ import {About} from './index';
 import {changeData} from "../actions";
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux';
+import {Button, Col, Container, Input, Row} from 'reactstrap';
 
 
 class Channel extends React.Component {
@@ -22,29 +23,30 @@ class Channel extends React.Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row justify-content-center'>
-                    <h1>The Stage</h1>
-                </div>
-                <div className='row justify-content-center my-3'>
-                    <img src={`/images/microscope-badge-200.gif`} alt='' />
-                </div>
-                <div className='row justify-content-center my-3'>
-                    <input value={this.state.channel} name='channel'
-                           placeholder='Channel Name'
-                           onChange={this.handleChange}/>
-                </div>
-                <div className='row justify-content-center my-3'>
-                    <input value={this.state.user} name='user'
-                           placeholder='User Name'
-                           onChange={this.handleChange}/>
-                </div>
-                <div className='row justify-content-center my-3'>
-                    <input type='submit' value='Enter'
-                           onClick={this.handleClick}/>
-                </div>
-                <About/>
-            </div>
+            <Container>
+                <Col sm={{size: 6, offset: 3}}>
+                    <Row className='justify-content-center'>
+                        <h1>The Stage</h1>
+                    </Row>
+                    <Row className='justify-content-center my-3'>
+                        <img src={`/images/microscope-badge-200.gif`} alt=''/>
+                    </Row>
+                    <Row className='justify-content-center my-3'>
+                        <Input value={this.state.channel} name='channel'
+                               placeholder='Channel Name'
+                               onChange={this.handleChange}/>
+                    </Row>
+                    <Row className='justify-content-center my-3'>
+                        <Input value={this.state.user} name='user'
+                               placeholder='User Name'
+                               onChange={this.handleChange}/>
+                    </Row>
+                    <Row className=' justify-content-center my-3'>
+                        <Button color='primary' onClick={this.handleClick}>Enter</Button>
+                    </Row>
+                    <About/>
+                </Col>
+            </Container>
         )
     }
 }

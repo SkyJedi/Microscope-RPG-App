@@ -1,7 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as Component from './index'
+import * as Component from './index';
+import {Container} from 'reactstrap';
 
 class MainPage extends React.Component {
     state = {loading: false};
@@ -10,9 +11,9 @@ class MainPage extends React.Component {
     render() {
         if (this.state.loading) return <h1>LOADING</h1>;
         return (
-            <div className='container'>
-                <Component.PeriodCard/>
-            </div>
+            <Container>
+                <Component.TimeLine/>
+            </Container>
         )
     }
 }

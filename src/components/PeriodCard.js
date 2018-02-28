@@ -46,7 +46,7 @@ class PeriodCard extends Component {
         const {type, header, title, text} = this.state;
         const {edit} = this.state;
         return (
-            <Card className={type === 'dark' ? 'text-white bg-dark h-90' : 'bg-light h-90'}>
+            <Card className={type === 'dark' ? 'text-white bg-dark h-90 cardWidth' : 'bg-light h-90 cardWidth'}>
                 <CardHeader>
                     {edit ?
                         <Input name='header'

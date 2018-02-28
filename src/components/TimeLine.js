@@ -35,7 +35,7 @@ class TimeLine extends Component {
                 {Object.keys(periods).sort((a, b) => {
                     return periods[a].position - periods[b].position
                 }).map((key, index) =>
-                    <Col sm='3' className='h-100 mx-2' key={key}>
+                    <Col sm='3' className='h-100 mx-2 colWidth' key={key}>
                         <Components.PeriodCard period={periods[key]} periodKey={key}
                         />
                         <ButtonGroup className='float-right'>

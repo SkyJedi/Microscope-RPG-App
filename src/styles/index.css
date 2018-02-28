@@ -1,7 +1,6 @@
 .container-scroll > .row {
-    overflow-x: scroll;
+    overflow-x: auto;
     flex-wrap: nowrap;
-    white-space: nowrap;
 }
 
 .container-scroll > .row > .col-sm-3 {
@@ -17,9 +16,25 @@
     height: 450px;
 }
 
+.colWidth {
+    max-width: 175px;
+}
+
 @media only screen
 and (max-height: 480px) {
     .rowHeight {
         height: 90vh;
     }
 }
+
+@media only screen
+and (max-width: 480px) {
+    .colWidth {
+        width: 45vw;
+    }
+
+    .cardWidth {
+        width: 45vw;
+    }
+}
+

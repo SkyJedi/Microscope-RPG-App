@@ -7,6 +7,7 @@ import allReducers from './reducers';
 import {App} from './components/index';
 
 require('bootstrap/dist/css/bootstrap.css');
+require('./styles/index.css');
 
 export const store = createStore(allReducers, {}, applyMiddleware(thunk));
 

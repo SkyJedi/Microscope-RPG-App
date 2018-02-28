@@ -3,7 +3,7 @@ import {About} from './index';
 import {changeData} from "../actions";
 import {bindActionCreators} from "redux";
 import {connect} from 'react-redux';
-import {Button, Col, Container, Input, Row} from 'reactstrap';
+import {Button, Col, Input, Row} from 'reactstrap';
 
 
 class Channel extends React.Component {
@@ -23,7 +23,6 @@ class Channel extends React.Component {
 
     render() {
         return (
-            <Container>
                 <Col sm={{size: 6, offset: 3}}>
                     <Row className='justify-content-center'>
                         <h1>The Stage</h1>
@@ -46,7 +45,6 @@ class Channel extends React.Component {
                     </Row>
                     <About/>
                 </Col>
-            </Container>
         )
     }
 }

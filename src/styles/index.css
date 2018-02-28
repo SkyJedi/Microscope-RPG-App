@@ -1,0 +1,25 @@
+.container-scroll > .row {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.container-scroll > .row > .col-sm-3 {
+    display: inline-block;
+    float: none;
+}
+
+.h-90 {
+    height: 90% !important;
+}
+
+.rowHeight {
+    height: 450px;
+}
+
+@media only screen
+and (max-height: 480px) {
+    .rowHeight {
+        height: 90vh;
+    }
+}

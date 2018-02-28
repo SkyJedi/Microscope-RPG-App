@@ -4,6 +4,6 @@ import * as changeState from './changeState';
 const allReducers = combineReducers({
     channel: changeState.channel,
     user: changeState.user,
-    period: changeState.period,
+    periods: changeState.periods,
 });
 export default allReducers;

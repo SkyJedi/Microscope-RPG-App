@@ -17,7 +17,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='container-fluid container-scroll'>
                 {this.props.channel === null ? <Channel /> : <MainPage />}
             </div>
 

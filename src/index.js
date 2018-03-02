@@ -13,7 +13,9 @@ export const store = createStore(allReducers, {}, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <div className='container-fluid container-scroll'>
+            <App/>
+        </div>
     </Provider>,
     document.getElementById('root')
 );

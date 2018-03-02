@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {changeData} from '../actions';
-import {Channel, MainPage} from "./index";
+import {changeData, loadData} from '../actions';
 
-class App extends React.Component {
+import {Channel} from "./index";
+
+class App extends Component {
 
     componentWillMount() {
         if (window.location.pathname !== '/') {
@@ -15,23 +16,27 @@ class App extends React.Component {
         }
     }
 
-    render() {
-        return (
-            <div className='container-fluid container-scroll'>
-                {this.props.channel === null ? <Channel /> : <MainPage />}
-            </div>
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.channel !== this.props.channel && nextProps.channel) this.props.loadData();
+    }
 
-        )
+    render() {
+        const {channel, display, loading} = this.props;
+        if (!channel) return <Channel/>;
+        if (loading) return <h1>LOADING</h1>;
+        else return display;
     }
 }
 
 function mapStateToProps(state) {
     return {
         channel: state.channel,
+        loading: state.loading,
+        display: state.display,
     };
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({changeData}, dispatch);
+    return bindActionCreators({changeData, loadData}, dispatch);
 }
 export default connect(mapStateToProps, matchDispatchToProps)(App);

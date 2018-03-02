@@ -3,7 +3,11 @@ import * as changeState from './changeState';
 
 const allReducers = combineReducers({
     channel: changeState.channel,
-    user: changeState.user,
+    display: changeState.display,
+    events: changeState.events,
+    loading: changeState.loading,
     periods: changeState.periods,
+    scenes: changeState.scenes,
+    user: changeState.user,
 });
 export default allReducers;

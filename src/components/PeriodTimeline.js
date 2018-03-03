@@ -37,11 +37,16 @@ class PeriodTimeline extends Component {
         return (
             <div className='container-scroll'>
                 <Row className='align-items-center no-gutters py-0'>
-                    <Breadcrumb className='py-0 bg-white my-0'>
-                        <BreadcrumbItem className='py-0 px-0' active>
-                            <Button className='py-0 px-0' color='link' disabled>Periods</Button>
-                        </BreadcrumbItem>
-                    </Breadcrumb>
+                    <Col>
+                        <Breadcrumb className='py-0 bg-white my-0'>
+                            <BreadcrumbItem className='py-0 px-0' active>
+                                <Button className='py-0 px-0' color='link' disabled>Periods</Button>
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                    </Col>
+                    <Col className='align-self-end'>
+                        <Components.Overview/>
+                    </Col>
                 </Row>
 
                 <Row className='align-items-center no-gutters rowHeight'>

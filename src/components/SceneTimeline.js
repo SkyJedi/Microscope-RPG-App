@@ -10,19 +10,26 @@ class SceneTimeline extends Component {
 
     breadCrumbs = (
         <Row className='align-items-center no-gutters py-0'>
-            <Breadcrumb className='py-0 bg-white my-0'>
-                <BreadcrumbItem className='py-0 px-0'>
-                    <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
-                        <Components.PeriodTimeline/>, 'display')}>Periods</Button>
-                </BreadcrumbItem>
-                <BreadcrumbItem className='py-0 px-0'>
-                    <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
-                        <Components.EventTimeline timeKey={this.props.superTimeKey}/>, 'display')}> Events</Button>
-                </BreadcrumbItem>
-                <BreadcrumbItem className='py-0 px-0'>
-                    <Button className='py-0 px-0' color='link' disabled>Scenes</Button>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <Col>
+                <Breadcrumb className='py-0 bg-white my-0'>
+                    <BreadcrumbItem className='py-0 px-0'>
+                        <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
+                            <Components.PeriodTimeline/>, 'display')}>Periods</Button>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem className='py-0 px-0'>
+                        <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
+                            <Components.EventTimeline
+                                timeKey={this.props.superTimeKey}/>, 'display')}>{this.props.periods[this.props.superTimeKey].header}</Button>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem className='py-0 px-0'>
+                        <Button className='py-0 px-0' color='link'
+                                disabled>{this.props.events[this.props.superTimeKey][this.props.timeKey].header}</Button>
+                    </BreadcrumbItem>
+                </Breadcrumb>
+            </Col>
+            <Col className='align-self-end'>
+                <Components.Overview/>
+            </Col>
         </Row>);
 
 
@@ -87,6 +94,8 @@ class SceneTimeline extends Component {
 
 function mapStateToProps(state) {
     return {
+        periods: state.periods,
+        events: state.events,
         scenes: state.scenes,
     };
 }

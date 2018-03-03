@@ -23,6 +23,10 @@ export const loading = (state = true, action) => {
     return state;
 };
 
+export const overview = (state = null, action) => {
+    if (action.type === 'overview_Changed') return action.payload;
+    return state;
+};
 export const periods = (state = initialState.periods, action) => {
     if (action.type === 'periods_Changed') return action.payload;
     return state;

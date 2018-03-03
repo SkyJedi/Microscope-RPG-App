@@ -5,6 +5,8 @@ export {default as TimeCard} from './TimeCard';
 export {default as PeriodTimeline} from './PeriodTimeline';
 export {default as EventTimeline} from './EventTimeline';
 export {default as SceneTimeline} from './SceneTimeline';
+export {default as Overview} from './Overview';
+
 
 
 

@@ -6,6 +6,7 @@ import * as Components from './index';
 import {changeData} from "../actions";
 
 class PeriodTimeline extends Component {
+    state = {show: false};
 
     componentDidMount() {
         this.props.changeData(this.props.periods, 'periods')
@@ -37,7 +38,10 @@ class PeriodTimeline extends Component {
         return (
             <div className='container-scroll'>
                 <Row className='align-items-center no-gutters py-0'>
-                    <Col>
+                    <Col className='form-inline'>
+                        <Button className='py-0 px-0' onClick={() => this.setState({show: !this.state.show})}
+                                color='link'>Show Palette</Button>
+
                         <Breadcrumb className='py-0 bg-white my-0'>
                             <BreadcrumbItem className='py-0 px-0' active>
                                 <Button className='py-0 px-0' color='link' disabled>Periods</Button>
@@ -49,7 +53,11 @@ class PeriodTimeline extends Component {
                     </Col>
                 </Row>
 
-                <Row className='align-items-center no-gutters rowHeight'>
+                <Row className='align-items-top no-gutters rowHeight'>
+                    {this.state.show &&
+                    <Col sm='3' className='h-100 mx-2 colWidth'>
+                        <Components.Palette/>
+                    </Col>}
                     {Object.keys(periods).sort((a, b) => {
                         return periods[a].position - periods[b].position
                     }).map((key, index) =>
@@ -73,7 +81,6 @@ class PeriodTimeline extends Component {
 
 function mapStateToProps(state) {
     return {
-        channel: state.channel,
         user: state.user,
         periods: state.periods,
     };

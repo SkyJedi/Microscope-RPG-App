@@ -5,7 +5,7 @@ const localData = ['user', 'channel', 'display'];
 export const loadData = () => {
     return (dispatch, getState) => {
         const channel = getState().channel;
-        let dataTypes = ['periods', 'events', 'scenes', 'overview'];
+        let dataTypes = ['periods', 'events', 'scenes', 'overview', 'palette'];
         dataTypes.forEach((type, index) => {
             db.doc(`channel/${channel}/data/${type}/`).onSnapshot((doc) => {
                 if (doc.exists) dispatch({type: `${type}_Changed`, payload: doc.data()});

@@ -7,8 +7,12 @@ import {Button, Input} from 'reactstrap';
 class Overview extends Component {
     state = {
         edit: false,
-        text: this.props.overview
+        text: this.props.overview ? this.props.overview.text : ''
     };
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({text: nextProps.overview.text});
+    }
 
     handleChange = (event) => {
         this.setState({text: event.target.value})

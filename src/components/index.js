@@ -6,6 +6,8 @@ export {default as PeriodTimeline} from './PeriodTimeline';
 export {default as EventTimeline} from './EventTimeline';
 export {default as SceneTimeline} from './SceneTimeline';
 export {default as Overview} from './Overview';
+export {default as Palette} from './Palette';
+
 
 
 

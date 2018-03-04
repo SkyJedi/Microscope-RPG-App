@@ -13,15 +13,16 @@ class EventTimeline extends Component {
         <Row className='align-items-center no-gutters py-0'>
             <Col className='form-inline'>
                 <Button className='py-0 px-0' onClick={() => this.setState({show: !this.state.show})} color='link'>Show
-                    Palette</Button>
+                    Palette
+                </Button>
                 <Breadcrumb className='py-0 bg-white my-0'>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
-                            <Components.PeriodTimeline/>, 'display')}>Periods</Button>
+                            <Components.PeriodTimeline/>, 'display')}>Overview</Button>
                     </BreadcrumbItem>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link'
-                                disabled>{this.props.periods[this.props.timeKey].header}</Button>
+                                disabled>Period: {this.props.periods[this.props.timeKey].header}</Button>
                     </BreadcrumbItem>
                 </Breadcrumb>
             </Col>

@@ -44,7 +44,7 @@ class PeriodTimeline extends Component {
 
                         <Breadcrumb className='py-0 bg-white my-0'>
                             <BreadcrumbItem className='py-0 px-0' active>
-                                <Button className='py-0 px-0' color='link' disabled>Periods</Button>
+                                <Button className='py-0 px-0' color='link' disabled>Overview</Button>
                             </BreadcrumbItem>
                         </Breadcrumb>
                     </Col>

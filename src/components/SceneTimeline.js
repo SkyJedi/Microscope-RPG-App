@@ -17,16 +17,18 @@ class SceneTimeline extends Component {
                 <Breadcrumb className='py-0 bg-white my-0'>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
-                            <Components.PeriodTimeline/>, 'display')}>Periods</Button>
+                            <Components.PeriodTimeline/>, 'display')}>Overview</Button>
                     </BreadcrumbItem>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
                             <Components.EventTimeline
-                                timeKey={this.props.superTimeKey}/>, 'display')}>{this.props.periods[this.props.superTimeKey].header}</Button>
+                                timeKey={this.props.superTimeKey}/>, 'display')}>Period: {this.props.periods[this.props.superTimeKey].header}
+                        </Button>
                     </BreadcrumbItem>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link'
-                                disabled>{this.props.events[this.props.superTimeKey][this.props.timeKey].header}</Button>
+                                disabled>Event: {this.props.events[this.props.superTimeKey][this.props.timeKey].header}
+                        </Button>
                     </BreadcrumbItem>
                 </Breadcrumb>
             </Col>

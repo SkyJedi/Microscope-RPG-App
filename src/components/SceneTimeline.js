@@ -47,7 +47,7 @@ class SceneTimeline extends Component {
         Object.keys(newObject[timeKey]).forEach((key) => {
             if (newObject[timeKey][key].position > position) newObject[timeKey][key].position++
         });
-        newObject[timeKey][newKey] = {position: position + 1};
+        newObject[timeKey][newKey] = {position: position + 1, author: this.props.user};
         this.props.changeData(newObject, 'scenes');
     };
 

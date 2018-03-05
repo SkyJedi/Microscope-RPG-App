@@ -49,6 +49,7 @@ class TimeCard extends Component {
                     header: this.state.header,
                     title: this.state.title,
                     text: this.state.text,
+                    author: this.props.time.author,
                     position: this.props.time.position
                 };
             } else {
@@ -58,6 +59,7 @@ class TimeCard extends Component {
                     header: this.state.header,
                     title: this.state.title,
                     text: this.state.text,
+                    author: this.props.time.author,
                     position: this.props.time.position
                 };
             }
@@ -100,7 +102,7 @@ class TimeCard extends Component {
 
     render() {
         const {type, header, title, text, edit} = this.state;
-        const {timeScale} = this.props;
+        const {timeScale,} = this.props;
         return (
             <Card className={type === 'dark' ? 'text-white bg-dark h-90 cardWidth' : 'bg-light h-90 cardWidth'}>
                 <CardHeader>
@@ -125,6 +127,10 @@ class TimeCard extends Component {
                             /> : text ? text : `${timeScale} Description`
                         }
                     </CardText>
+                    <CardText className='font-italic'>
+                        {this.props.time.author && `-${this.props.time.author}`}
+                    </CardText>
+
                     {edit &&
                     <ButtonGroup className='my-1'>
                         <Button color='dark' onClick={() => this.setState({type: 'dark'})}>Dark</Button>

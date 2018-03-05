@@ -19,7 +19,7 @@ class PeriodTimeline extends Component {
         Object.keys(newObject).forEach((key) => {
             if (newObject[key].position > position) newObject[key].position++
         });
-        newObject[newKey] = {position: position + 1};
+        newObject[newKey] = {position: position + 1, author: this.props.user};
         this.props.changeData(newObject, 'periods');
     };
 

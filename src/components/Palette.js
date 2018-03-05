@@ -7,8 +7,8 @@ import {Button, Card, CardBody, CardFooter, CardHeader, CardText} from 'reactstr
 class Palette extends Component {
     state = {
         edit: false,
-        yes: this.props.palette.yes ? this.props.palette.yes : '',
-        no: this.props.palette.no ? this.props.palette.no : '',
+        yes: this.props.palette ? this.props.palette.yes : '',
+        no: this.props.palette ? this.props.palette.no : '',
     };
 
     componentWillReceiveProps(nextProps) {

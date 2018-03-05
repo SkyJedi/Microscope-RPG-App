@@ -28,7 +28,7 @@ export const overview = (state = null, action) => {
     return state;
 };
 
-export const palette = (state = null, action) => {
+export const palette = (state = initialState.palette, action) => {
     if (action.type === 'palette_Changed') return action.payload;
     return state;
 };

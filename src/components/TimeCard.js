@@ -49,7 +49,7 @@ class TimeCard extends Component {
                     header: this.state.header,
                     title: this.state.title,
                     text: this.state.text,
-                    author: this.props.time.author,
+                    author: this.props.time.author ? this.props.time.author : this.props.user,
                     position: this.props.time.position
                 };
             } else {
@@ -59,7 +59,7 @@ class TimeCard extends Component {
                     header: this.state.header,
                     title: this.state.title,
                     text: this.state.text,
-                    author: this.props.time.author,
+                    author: this.props.time.author ? this.props.time.author : this.props.user,
                     position: this.props.time.position
                 };
             }

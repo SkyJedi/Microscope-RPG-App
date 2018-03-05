@@ -18,6 +18,7 @@
 
 .colWidth {
     max-width: 40vh;
+    min-width: 250px;
 }
 
 @media only screen
@@ -30,7 +31,9 @@ and (max-height: 480px) {
 @media only screen
 and (max-width: 480px) {
     .colWidth {
-        width: 45vw;
+        width: 43vw;
+        max-width: unset;
+        min-width: unset;
     }
 
     .cardWidth {

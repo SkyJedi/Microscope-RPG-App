@@ -102,6 +102,7 @@ class EventTimeline extends Component {
 
 function mapStateToProps(state) {
     return {
+        user: state.user,
         periods: state.periods,
         events: state.events,
     };

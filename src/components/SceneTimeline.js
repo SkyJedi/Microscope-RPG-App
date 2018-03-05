@@ -111,6 +111,7 @@ function mapStateToProps(state) {
         periods: state.periods,
         events: state.events,
         scenes: state.scenes,
+        user: state.user,
     };
 }
 

@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeData} from '../actions';
 import * as Components from './index';
-import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Input} from 'reactstrap';
+import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, Input} from 'reactstrap';
 
 class TimeCard extends Component {
     state = {
@@ -104,22 +104,17 @@ class TimeCard extends Component {
         return (
             <Card className={type === 'dark' ? 'text-white bg-dark h-90 cardWidth' : 'bg-light h-90 cardWidth'}>
                 <CardHeader>
-                    {edit ?
-                        <Input name='header'
-                               onChange={this.handleChange}
-                               placeholder={`${timeScale} Name`}
-                               value={header}
-                        /> : header}
-                </CardHeader>
-                <CardBody style={{overflowY: 'scroll'}}>
-                    <CardTitle>
+                    <div className='text-center my-1'>{header ? header : ``}</div>
+                    <div className='font-weight-bold'>
                         {edit ?
                             <Input name='title'
                                    onChange={this.handleChange}
                                    placeholder={title ? title : `${timeScale} Title`}
                                    value={title}
                             /> : title ? title : `${timeScale} Title`}
-                    </CardTitle>
+                    </div>
+                </CardHeader>
+                <CardBody style={{overflowY: 'scroll'}}>
                     <CardText>
                         {edit ?
                             <textarea className='w-100'

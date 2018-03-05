@@ -19,7 +19,7 @@ class PeriodTimeline extends Component {
         Object.keys(newObject).forEach((key) => {
             if (newObject[key].position > position) newObject[key].position++
         });
-        newObject[newKey] = {header: 'New Period', position: position + 1};
+        newObject[newKey] = {position: position + 1};
         this.props.changeData(newObject, 'periods');
     };
 
@@ -41,7 +41,6 @@ class PeriodTimeline extends Component {
                     <Col className='form-inline'>
                         <Button className='py-0 px-0' onClick={() => this.setState({show: !this.state.show})}
                                 color='link'>Show Palette</Button>
-
                         <Breadcrumb className='py-0 bg-white my-0'>
                             <BreadcrumbItem className='py-0 px-0' active>
                                 <Button className='py-0 px-0' color='link' disabled>Overview</Button>

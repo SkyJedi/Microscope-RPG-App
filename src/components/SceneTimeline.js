@@ -22,12 +22,12 @@ class SceneTimeline extends Component {
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
                             <Components.EventTimeline
-                                timeKey={this.props.superTimeKey}/>, 'display')}>Period: {this.props.periods[this.props.superTimeKey].header}
+                                timeKey={this.props.superTimeKey}/>, 'display')}>Period: {this.props.periods[this.props.superTimeKey].title}
                         </Button>
                     </BreadcrumbItem>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link'
-                                disabled>Event: {this.props.events[this.props.superTimeKey][this.props.timeKey].header}
+                                disabled>Event: {this.props.events[this.props.superTimeKey][this.props.timeKey].title}
                         </Button>
                     </BreadcrumbItem>
                 </Breadcrumb>
@@ -84,14 +84,19 @@ class SceneTimeline extends Component {
                     </Col>}
                     {Object.keys(eventScenes).sort((a, b) => {
                         return eventScenes[a].position - eventScenes[b].position
-                    }).map((key) =>
+                    }).map((key, index) =>
                         <Col sm='3' className='h-100 mx-2 colWidth' key={key}>
                             <Components.TimeCard time={eventScenes[key]} timeKey={key} superTimeKey={timeKey}
                                                  timeScale='Scene'/>
                             <ButtonGroup className='float-right'>
-                                <Button color='danger' name={key} onClick={this.deleteCard}>Delete ↑</Button>
-                                <Button color='secondary' name={eventScenes[key].position} onClick={this.addCard}>Add
-                                    →</Button>
+                                {index === 0 &&
+                                <Button color='secondary' size='sm' className='px-1' name={-1}
+                                        onClick={this.addCard}>←Add</Button>
+                                }
+                                <Button color='danger' size='sm' className='px-1' name={key} onClick={this.deleteCard}>Delete
+                                    ↑</Button>
+                                <Button color='secondary' size='sm' className='px-1' name={eventScenes[key].position}
+                                        onClick={this.addCard}>Add →</Button>
                             </ButtonGroup>
                         </Col>
                     )}

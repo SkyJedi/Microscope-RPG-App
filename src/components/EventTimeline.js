@@ -22,7 +22,7 @@ class EventTimeline extends Component {
                     </BreadcrumbItem>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link'
-                                disabled>Period: {this.props.periods[this.props.timeKey].header}</Button>
+                                disabled>Period: {this.props.periods[this.props.timeKey].title}</Button>
                     </BreadcrumbItem>
                 </Breadcrumb>
             </Col>
@@ -78,14 +78,19 @@ class EventTimeline extends Component {
                     </Col>}
                     {Object.keys(periodEvents).sort((a, b) => {
                         return periodEvents[a].position - periodEvents[b].position
-                    }).map((key) =>
-                        <Col sm='3' className='h-100 mx-2 colWidth' key={key}>
+                    }).map((key, index) =>
+                        <Col sm='4' className='h-100 mx-2 colWidth' key={key}>
                             <Components.TimeCard time={periodEvents[key]} timeKey={key} superTimeKey={timeKey}
                                                  timeScale='Event'/>
                             <ButtonGroup className='float-right'>
-                                <Button color='danger' name={key} onClick={this.deleteCard}>Delete ↑</Button>
-                                <Button color='secondary' name={periodEvents[key].position} onClick={this.addCard}>Add
-                                    →</Button>
+                                {index === 0 &&
+                                <Button color='secondary' size='sm' className='px-1' name={-1}
+                                        onClick={this.addCard}>←Add</Button>
+                                }
+                                <Button color='danger' size='sm' className='px-1' name={key} onClick={this.deleteCard}>Delete
+                                    ↑</Button>
+                                <Button color='secondary' size='sm' className='px-1' name={periodEvents[key].position}
+                                        onClick={this.addCard}>Add →</Button>
                             </ButtonGroup>
                         </Col>
                     )}

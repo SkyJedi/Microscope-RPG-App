@@ -23,25 +23,29 @@ class Log extends Component {
                 break;
             case 'addEvent':
                 newObj.text += ` added a Event:`;
-                newObj.link = events[logData.periodKey] && (
+                newObj.link = periods[logData.periodKey] && (
+                    events[logData.periodKey] && (
                     events[logData.periodKey][logData.eventKey] && (
                         <Button color='link' name='Event'
                                 onClick={() => this.props.changeData(<Components.EventTimeline
                                     timeKey={logData.periodKey} superTimeKey={logData.periodKey}/>, 'display')}>
                             {events[logData.periodKey][logData.eventKey].title ? events[logData.periodKey][logData.eventKey].title : 'untitled'}
                         </Button>
-                    ));
+                    )));
                 break;
             case 'addScene':
                 newObj.text += ` added a Scene:`;
-                newObj.link = scenes[logData.eventKey] && (
+                newObj.link = periods[logData.periodKey] && (
+                    events[logData.periodKey] && (
+                    events[logData.periodKey][logData.eventKey] && (
+                    scenes[logData.eventKey] && (
                     scenes[logData.eventKey][logData.sceneKey] && (
                         <Button color='link' name='Event'
                                 onClick={() => this.props.changeData(<Components.SceneTimeline
                                     timeKey={logData.eventKey} superTimeKey={logData.periodKey}/>, 'display')}>
                             {scenes[logData.eventKey][logData.sceneKey].title ? scenes[logData.eventKey][logData.sceneKey].title : 'untitled'}
                         </Button>
-                    ));
+                    )))));
                 break;
             default:
                 break;

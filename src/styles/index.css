@@ -24,12 +24,16 @@
 @media only screen
 and (max-height: 480px) {
     .rowHeight {
-        height: 90vh;
+        height: 70vh;
     }
 }
 
 @media only screen
 and (max-width: 480px) {
+    .rowHeight {
+        height: 80vh;
+    }
+
     .colWidth {
         width: 43vw;
         max-width: unset;

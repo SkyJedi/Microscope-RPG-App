@@ -58,7 +58,7 @@ class TimeCard extends Component {
                     type: this.state.type,
                     header: this.state.header,
                     title: this.state.title,
-                    text: this.state.text,
+                    text: this.state.text.replace(/\r?\n/g, '<br />'),
                     author: this.props.time.author ? this.props.time.author : this.props.user,
                     position: this.props.time.position
                 };
@@ -118,7 +118,7 @@ class TimeCard extends Component {
 
                 </CardHeader>
                 <CardBody style={{overflowY: 'scroll'}}>
-                    <CardText>
+                    <CardText style={{whiteSpace: 'pre-line'}}>
                         {edit ?
                             <textarea className='w-100'
                                       rows='5'

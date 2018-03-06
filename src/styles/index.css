@@ -39,13 +39,13 @@ and (max-width: 480px) {
     }
 
     .colWidth {
-        width: 43vw;
+        width: 90vw;
         max-width: unset;
         min-width: unset;
     }
 
     .cardWidth {
-        width: 45vw;
+        width: 90vw;
     }
 }
 

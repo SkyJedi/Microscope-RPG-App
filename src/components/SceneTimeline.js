@@ -38,7 +38,7 @@ class SceneTimeline extends Component {
 
 
     addCard = (event) => {
-        const {timeKey, scenes} = this.props;
+        const {timeKey, scenes, superTimeKey} = this.props;
         let position = +event.target.name;
         let newKey = Math.random().toString(36).substr(2, 10);
         let newObject = {...scenes};
@@ -53,8 +53,9 @@ class SceneTimeline extends Component {
             [today.getTime()]: {
                 user: this.props.user,
                 type: 'addScene',
+                sceneKey: newKey,
                 eventKey: timeKey,
-                sceneKey: newKey
+                periodKey: superTimeKey
             }
         }, 'logs')
     };

@@ -1,28 +1,52 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Card, CardBody, CardHeader, ListGroup, ListGroupItem} from 'reactstrap';
+import {changeData} from '../actions';
+import * as Components from './index';
+import {Button, Card, CardBody, CardHeader, ListGroup, ListGroupItem} from 'reactstrap';
 
 class Log extends Component {
 
     makeLog = (key) => {
         const {periods, events, scenes, logs} = this.props;
         let logData = logs[key];
-        let text = `${logData.user}`;
+        let newObj = {text: `${logData.user}`, link: ''};
         switch (logData.type) {
             case 'addPeriod':
-                text += ` added a Period: \n${periods[logData.periodKey] && (periods[logData.periodKey].title ? periods[logData.periodKey].title : 'untitled')}`;
+                newObj.text += ` added a Period:`;
+                newObj.link = periods[logData.periodKey] && (
+                    <Button color='link' name='Period'
+                            onClick={() => this.props.changeData(<Components.PeriodTimeline/>, 'display')}>
+                        {periods[logData.periodKey] ? periods[logData.periodKey].title : 'untitled'}
+                    </Button>
+                );
                 break;
             case 'addEvent':
-                text += ` added a Event: \n${events[logData.periodKey] && (events[logData.periodKey][logData.eventKey] && (events[logData.periodKey][logData.eventKey].title ? events[logData.periodKey][logData.eventKey].title : 'untitled'))}`;
+                newObj.text += ` added a Event:`;
+                newObj.link = events[logData.periodKey] && (
+                    events[logData.periodKey][logData.eventKey] && (
+                        <Button color='link' name='Event'
+                                onClick={() => this.props.changeData(<Components.EventTimeline
+                                    timeKey={logData.periodKey} superTimeKey={logData.periodKey}/>, 'display')}>
+                            {events[logData.periodKey][logData.eventKey].title ? events[logData.periodKey][logData.eventKey].title : 'untitled'}
+                        </Button>
+                    ));
                 break;
             case 'addScene':
-                text += ` added a Scene: \n${scenes[logData.eventKey] && (scenes[logData.eventKey][logData.sceneKey] && (scenes[logData.eventKey][logData.sceneKey].title ? scenes[logData.eventKey][logData.sceneKey].title : 'untitled'))}`;
+                newObj.text += ` added a Scene:`;
+                newObj.link = scenes[logData.eventKey] && (
+                    scenes[logData.eventKey][logData.sceneKey] && (
+                        <Button color='link' name='Event'
+                                onClick={() => this.props.changeData(<Components.SceneTimeline
+                                    timeKey={logData.eventKey} superTimeKey={logData.periodKey}/>, 'display')}>
+                            {scenes[logData.eventKey][logData.sceneKey].title ? scenes[logData.eventKey][logData.sceneKey].title : 'untitled'}
+                        </Button>
+                    ));
                 break;
             default:
                 break;
         }
-        return text;
+        return newObj;
     };
 
     render() {
@@ -39,7 +63,8 @@ class Log extends Component {
                             return b - a
                         }).map((key) =>
                             <ListGroupItem key={key} className='text-dark mx-0 my-1 px-0 py-0'>
-                                {this.makeLog(key)}
+                                {this.makeLog(key).text}
+                                {this.makeLog(key).link}
                             </ListGroupItem>
                         )}
                     </ListGroup>
@@ -61,7 +86,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({}, dispatch);
+    return bindActionCreators({changeData}, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Log);

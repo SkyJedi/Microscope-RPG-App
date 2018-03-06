@@ -23,6 +23,11 @@ export const loading = (state = true, action) => {
     return state;
 };
 
+export const logs = (state = null, action) => {
+    if (action.type === 'logs_Changed') return action.payload;
+    return state;
+};
+
 export const overview = (state = null, action) => {
     if (action.type === 'overview_Changed') return action.payload;
     return state;

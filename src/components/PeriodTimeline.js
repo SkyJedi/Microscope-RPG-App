@@ -21,6 +21,14 @@ class PeriodTimeline extends Component {
         });
         newObject[newKey] = {position: position + 1, author: this.props.user};
         this.props.changeData(newObject, 'periods');
+        let today = new Date();
+        this.props.changeData({
+            [today.getTime()]: {
+                user: this.props.user,
+                type: 'addPeriod',
+                periodKey: newKey
+            }
+        }, 'logs')
     };
 
     deleteCard = (event) => {
@@ -30,7 +38,7 @@ class PeriodTimeline extends Component {
             if (newObject[key].position > position) newObject[key].position--
         });
         delete newObject[event.target.name];
-        this.props.changeData(newObject, 'periods');
+        this.props.changeData(newObject, 'periods', false);
     };
 
     render() {
@@ -81,6 +89,7 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         periods: state.periods,
+        logs: state.logs,
     };
 }
 

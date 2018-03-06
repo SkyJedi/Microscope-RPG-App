@@ -6,6 +6,7 @@ const allReducers = combineReducers({
     display: changeState.display,
     events: changeState.events,
     loading: changeState.loading,
+    logs: changeState.logs,
     overview: changeState.overview,
     palette: changeState.palette,
     periods: changeState.periods,

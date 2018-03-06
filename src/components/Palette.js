@@ -40,41 +40,48 @@ class Palette extends Component {
         const {palette} = this.props;
         return (
             <Card inverse color='primary' className='h-90 cardWidth'>
-                <CardHeader>
-                    <b>Palette</b>
+                <CardHeader className='font-weight-bold'>
+                    Palette
                 </CardHeader>
                 <CardBody style={{overflowY: 'scroll'}}>
-                    <CardText className='mb-0'>
-                        <b>Yes:</b>
+                    <CardText className='mb-0 font-weight-bold'>
+                        Yes:
                     </CardText>
-                    <CardText style={{whiteSpace: 'pre-line'}}>
-                        {edit ?
-                            <textarea className='w-100'
-                                      rows='5'
-                                      name='yes'
-                                      onChange={this.handleChange}
-                                      value={yes}
-                            />
-                            : palette.yes ? <ListGroup>{palette.yes.split('\n').map(i => <ListGroupItem
-                                className='text-dark mx-0 my-1 px-0 py-0'>{i}</ListGroupItem>)}</ListGroup> : ``
-                        }
+                    {edit ?
+                        <textarea className='w-100'
+                                  rows='5'
+                                  name='yes'
+                                  onChange={this.handleChange}
+                                  value={yes}
+                        />
+                        : palette.yes ?
+                            <ListGroup>
+                                {palette.yes.split('\n').map(i =>
+                                    <ListGroupItem className='text-dark mx-0 my-1 px-0 py-0' key={i}>
+                                        {i}
+                                    </ListGroupItem>
+                                )}
+                            </ListGroup>
+                            : ``
+                    }
+                    <CardText className='mb-0 font-weight-bold'>
+                        No:
                     </CardText>
-                    <CardText className='mb-0'>
-                        <b>No:</b>
-                    </CardText>
-                    <CardText style={{whiteSpace: 'pre-line'}}>
-                        {edit ?
-                            <textarea className='w-100'
-                                      rows='5'
-                                      name='no'
-                                      onChange={this.handleChange}
-                                      value={no}
-                            />
-                            : palette.no ? <ListGroup>{palette.no.split('\n').map(i => <ListGroupItem
-                                className='text-dark mx-0 my-1 px-0 py-0'>{i}</ListGroupItem>)}</ListGroup> : ``
-                        }
-
-                    </CardText>
+                    {edit ?
+                        <textarea className='w-100'
+                                  rows='5'
+                                  name='no'
+                                  onChange={this.handleChange}
+                                  value={no}
+                        />
+                        : palette.no ?
+                            <ListGroup>{palette.no.split('\n').map(i =>
+                                <ListGroupItem className='text-dark mx-0 my-1 px-0 py-0' key={i}>
+                                    {i}
+                                </ListGroupItem>)}
+                            </ListGroup>
+                            : ``
+                    }
                 </CardBody>
 
                 < CardFooter>

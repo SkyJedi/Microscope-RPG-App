@@ -48,6 +48,15 @@ class SceneTimeline extends Component {
         });
         newObject[timeKey][newKey] = {position: position + 1, author: this.props.user};
         this.props.changeData(newObject, 'scenes');
+        let today = new Date();
+        this.props.changeData({
+            [today.getTime()]: {
+                user: this.props.user,
+                type: 'addScene',
+                eventKey: timeKey,
+                sceneKey: newKey
+            }
+        }, 'logs')
     };
 
     deleteCard = (event) => {
@@ -59,7 +68,7 @@ class SceneTimeline extends Component {
         });
         if (1 >= Object.keys(newObject[timeKey]).length) newObject[timeKey] = '';
         else delete newObject[timeKey][event.target.name];
-        this.props.changeData(newObject, 'scenes');
+        this.props.changeData(newObject, 'scenes', false);
     };
 
     render() {
@@ -111,6 +120,7 @@ function mapStateToProps(state) {
         events: state.events,
         scenes: state.scenes,
         user: state.user,
+        logs: state.logs,
     };
 }
 

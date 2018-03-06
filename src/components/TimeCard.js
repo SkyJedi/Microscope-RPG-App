@@ -15,12 +15,14 @@ class TimeCard extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            type: nextProps.time.type ? nextProps.time.type : 'light',
-            header: nextProps.time.header ? nextProps.time.header : '',
-            title: nextProps.time.title ? nextProps.time.title : '',
-            text: nextProps.time.text ? nextProps.time.text : ''
-        });
+        if (!this.state.edit) {
+            this.setState({
+                type: nextProps.time.type ? nextProps.time.type : 'light',
+                header: nextProps.time.header ? nextProps.time.header : '',
+                title: nextProps.time.title ? nextProps.time.title : '',
+                text: nextProps.time.text ? nextProps.time.text : ''
+            });
+        }
     }
 
     handleClick = () => {
@@ -58,7 +60,7 @@ class TimeCard extends Component {
                     type: this.state.type,
                     header: this.state.header,
                     title: this.state.title,
-                    text: this.state.text.replace(/\r?\n/g, '<br />'),
+                    text: this.state.text,
                     author: this.props.time.author ? this.props.time.author : this.props.user,
                     position: this.props.time.position
                 };

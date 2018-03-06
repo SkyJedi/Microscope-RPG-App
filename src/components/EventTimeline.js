@@ -10,11 +10,9 @@ class EventTimeline extends Component {
     state = {show: false};
 
     breadCrumbs = (
-        <Row className='align-items-center no-gutters py-0'>
+        <Row className='align-items-center no-gutters py-0 overFlow'>
             <Col className='form-inline'>
-                <Button className='py-0 px-0' onClick={() => this.setState({show: !this.state.show})} color='link'>Show
-                    Palette
-                </Button>
+                <Components.Selector handleShow={(type) => this.setState({show: type})}/>
                 <Breadcrumb className='py-0 bg-white my-0'>
                     <BreadcrumbItem className='py-0 px-0'>
                         <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
@@ -74,7 +72,7 @@ class EventTimeline extends Component {
                 <Row className='align-items-center no-gutters rowHeight'>
                     {this.state.show &&
                     <Col sm='3' className='h-100 mx-2 colWidth'>
-                        <Components.Palette/>
+                        {this.state.show}
                     </Col>}
                     {Object.keys(periodEvents).sort((a, b) => {
                         return periodEvents[a].position - periodEvents[b].position

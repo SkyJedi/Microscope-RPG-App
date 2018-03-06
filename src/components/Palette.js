@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeData} from '../actions';
-import {Button, Card, CardBody, CardFooter, CardHeader, CardText} from 'reactstrap';
+import {Button, Card, CardBody, CardFooter, CardHeader, CardText, ListGroup, ListGroupItem} from 'reactstrap';
 
 class Palette extends Component {
     state = {
@@ -47,27 +47,31 @@ class Palette extends Component {
                     <CardText className='mb-0'>
                         <b>Yes:</b>
                     </CardText>
-                    <CardText>
+                    <CardText style={{whiteSpace: 'pre-line'}}>
                         {edit ?
                             <textarea className='w-100'
                                       rows='5'
                                       name='yes'
                                       onChange={this.handleChange}
                                       value={yes}
-                            /> : palette.yes ? palette.yes : ``
+                            />
+                            : palette.yes ? <ListGroup>{palette.yes.split('\n').map(i => <ListGroupItem
+                                className='text-dark mx-0 my-1 px-0 py-0'>{i}</ListGroupItem>)}</ListGroup> : ``
                         }
                     </CardText>
                     <CardText className='mb-0'>
                         <b>No:</b>
                     </CardText>
-                    <CardText>
+                    <CardText style={{whiteSpace: 'pre-line'}}>
                         {edit ?
                             <textarea className='w-100'
                                       rows='5'
                                       name='no'
                                       onChange={this.handleChange}
                                       value={no}
-                            /> : palette.no ? palette.no : ``
+                            />
+                            : palette.no ? <ListGroup>{palette.no.split('\n').map(i => <ListGroupItem
+                                className='text-dark mx-0 my-1 px-0 py-0'>{i}</ListGroupItem>)}</ListGroup> : ``
                         }
 
                     </CardText>

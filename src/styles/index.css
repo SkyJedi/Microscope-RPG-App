@@ -3,6 +3,10 @@
     flex-wrap: nowrap;
 }
 
+.overFlow {
+    overflow: visible !important;
+}
+
 .container-scroll > .row > .col-sm-3 {
     display: inline-block;
     float: none;

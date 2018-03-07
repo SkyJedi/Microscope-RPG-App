@@ -30,7 +30,7 @@ class Channel extends React.Component {
                     <Row className='justify-content-center my-3'>
                         <img src={`/images/microscope-badge-200.gif`} alt=''/>
                     </Row>
-                    <Row className='justify-content-center my-3'>
+                    <Row className='justify-content-center my-3 '>
                         <Input value={this.state.channel} name='channel'
                                placeholder='Channel Name'
                                onChange={this.handleChange}/>

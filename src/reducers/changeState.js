@@ -1,15 +1,7 @@
 import * as initialState from './initialState';
-import * as Components from '../components/index';
-import React from 'react';
-
 
 export const channel = (state = null, action) =>{
     if (action.type === 'channel_Changed')  return action.payload;
-    return state;
-};
-
-export const display = (state = <Components.PeriodTimeline/>, action) => {
-    if (action.type === 'display_Changed') return action.payload;
     return state;
 };
 
@@ -45,6 +37,26 @@ export const periods = (state = initialState.periods, action) => {
 
 export const scenes = (state = null, action) => {
     if (action.type === 'scenes_Changed') return action.payload;
+    return state;
+};
+
+export const show = (state = false, action) => {
+    if (action.type === 'show_Changed') return action.payload;
+    return state;
+};
+
+export const superTimeKey = (state = null, action) => {
+    if (action.type === 'superTimeKey_Changed') return action.payload;
+    return state;
+};
+
+export const timeKey = (state = null, action) => {
+    if (action.type === 'timeKey_Changed') return action.payload;
+    return state;
+};
+
+export const timeScale = (state = 'Period', action) => {
+    if (action.type === 'timeScale_Changed') return action.payload;
     return state;
 };
 

@@ -1,35 +1,12 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Breadcrumb, BreadcrumbItem, Button, ButtonGroup, Col, Row} from 'reactstrap';
-import * as Components from './index';
+import {Button, ButtonGroup, Col, Row} from 'reactstrap';
+import {TimeCard} from './index';
 import {changeData} from "../actions";
 
 
 class EventTimeline extends Component {
-    state = {show: false};
-
-    breadCrumbs = (
-        <Row className='align-items-center no-gutters py-0 overFlow'>
-            <Col className='form-inline'>
-                <Components.Selector handleShow={(type) => this.setState({show: type})}/>
-                <Breadcrumb className='py-0 bg-white my-0'>
-                    <BreadcrumbItem className='py-0 px-0'>
-                        <Button className='py-0 px-0' color='link' onClick={() => this.props.changeData(
-                            <Components.PeriodTimeline/>, 'display')}>Overview</Button>
-                    </BreadcrumbItem>
-                    <BreadcrumbItem className='py-0 px-0'>
-                        <Button className='py-0 px-0' color='link'
-                                disabled>Period: {this.props.periods[this.props.timeKey].title}</Button>
-                    </BreadcrumbItem>
-                </Breadcrumb>
-            </Col>
-            <Col className='align-self-end'>
-                <Components.Overview/>
-            </Col>
-        </Row>);
-
-
     addCard = (event) => {
         const {timeKey, events} = this.props;
         let position = +event.target.name;
@@ -65,44 +42,39 @@ class EventTimeline extends Component {
     };
 
     render() {
-        const {events, timeKey} = this.props;
+        const {events, timeKey, show} = this.props;
         const periodEvents = events ? events[timeKey] : {};
         if (!periodEvents || 0 >= Object.keys(periodEvents).length) {
-            return (
-                <div>
-                    {this.breadCrumbs}
-                    <Button color='secondary' name={-1} onClick={this.addCard}>Add Event</Button>
-                </div>
-            )
+            return <Button color='secondary' name={-1} onClick={this.addCard}>Add Event</Button>
         }
         return (
-            <div className='container-scroll'>
-                {this.breadCrumbs}
-                <Row className='align-items-center no-gutters rowHeight'>
-                    {this.state.show &&
-                    <Col sm='3' className='h-100 mx-2 colWidth'>
-                        {this.state.show}
-                    </Col>}
-                    {Object.keys(periodEvents).sort((a, b) => {
-                        return periodEvents[a].position - periodEvents[b].position
-                    }).map((key, index) =>
-                        <Col sm='4' className='h-100 mx-2 colWidth' key={key}>
-                            <Components.TimeCard time={periodEvents[key]} timeKey={key} superTimeKey={timeKey}
-                                                 timeScale='Event'/>
-                            <ButtonGroup className='float-right'>
-                                {index === 0 &&
-                                <Button color='secondary' size='sm' className='px-1' name={-1}
-                                        onClick={this.addCard}>←Add</Button>
-                                }
-                                <Button color='danger' size='sm' className='px-1' name={key} onClick={this.deleteCard}>Delete
-                                    ↑</Button>
-                                <Button color='secondary' size='sm' className='px-1' name={periodEvents[key].position}
-                                        onClick={this.addCard}>Add →</Button>
-                            </ButtonGroup>
-                        </Col>
-                    )}
-                </Row>
-            </div>
+            <Row className='align-items-center no-gutters rowHeight'>
+                {show &&
+                <Col sm='3' className='h-100 mx-2 colWidth'>
+                    {show}
+                </Col>
+                }
+                {Object.keys(periodEvents).sort((a, b) => {
+                    return periodEvents[a].position - periodEvents[b].position
+                }).map((key, index) =>
+                    <Col sm='4' className='h-100 mx-2 colWidth' key={key}>
+                        <TimeCard time={periodEvents[key]} timeKey={key} superTimeKey={timeKey}/>
+                        <ButtonGroup className='float-right'>
+                            {index === 0 &&
+                            <Button color='secondary' size='sm' className='px-1' name={-1}
+                                    onClick={this.addCard}>←Add</Button>
+                            }
+                            <Button color='danger' size='sm' className='px-1' name={key}
+                                    onClick={this.deleteCard}>Delete
+                                ↑</Button>
+                            <Button color='secondary' size='sm' className='px-1'
+                                    name={periodEvents[key].position}
+                                    onClick={this.addCard}>Add →</Button>
+                        </ButtonGroup>
+                    </Col>
+                )}
+            </Row>
+
         )
     }
 }
@@ -113,6 +85,8 @@ function mapStateToProps(state) {
         periods: state.periods,
         events: state.events,
         logs: state.logs,
+        show: state.show,
+        timeKey: state.timeKey,
     };
 }
 

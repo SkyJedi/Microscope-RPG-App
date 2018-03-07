@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {changeData} from '../actions';
-import * as Components from './index';
+import {changeData, changeTimeline} from '../actions';
 import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, CardText, Input} from 'reactstrap';
 
 class TimeCard extends Component {
@@ -75,11 +74,17 @@ class TimeCard extends Component {
     };
 
     handleTimeline = () => {
-        let type;
-        type = this.props.timeScale === 'Period' ?
-            <Components.EventTimeline timeKey={this.props.timeKey} superTimeKey={this.props.superTimeKey}/> :
-            <Components.SceneTimeline timeKey={this.props.timeKey} superTimeKey={this.props.superTimeKey}/>;
-        this.props.changeData(type, 'display');
+        const {timeScale, changeTimeline, timeKey, superTimeKey} = this.props;
+        switch (timeScale) {
+            case 'Period':
+                changeTimeline('Event', timeKey, superTimeKey);
+                break;
+            case 'Event':
+                changeTimeline('Scene', timeKey, superTimeKey);
+                break;
+            default:
+                break;
+        }
     };
 
     subCount = () => {
@@ -104,7 +109,7 @@ class TimeCard extends Component {
 
     render() {
         const {type, header, title, text, edit} = this.state;
-        const {timeScale,} = this.props;
+        const {timeScale} = this.props;
         return (
             <Card className={type === 'dark' ? 'text-white bg-dark h-90 cardWidth' : 'bg-light h-90 cardWidth'}>
                 <CardHeader>
@@ -161,11 +166,12 @@ function mapStateToProps(state) {
         events: state.events,
         scenes: state.scenes,
         user: state.user,
+        timeScale: state.timeScale,
     };
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({changeData}, dispatch);
+    return bindActionCreators({changeData, changeTimeline}, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(TimeCard);

@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {changeData} from '../actions';
-import * as Components from './index';
+import {changeTimeline} from '../actions';
 import {Button, Card, CardBody, CardHeader, ListGroup, ListGroupItem} from 'reactstrap';
 
 class Log extends Component {
 
     makeLog = (key) => {
-        const {periods, events, scenes, logs} = this.props;
+        const {periods, events, scenes, logs, changeTimeline} = this.props;
         let logData = logs[key];
         let newObj = {text: `${logData.user}`, link: ''};
         switch (logData.type) {
             case 'addPeriod':
                 newObj.text += ` added a Period:`;
                 newObj.link = periods[logData.periodKey] && (
-                    <Button color='link' name='Period'
-                            onClick={() => this.props.changeData(<Components.PeriodTimeline/>, 'display')}>
+                    <Button color='link' name='Period' onClick={() => changeTimeline('Period', null, null)}>
                         {periods[logData.periodKey] ? periods[logData.periodKey].title : 'untitled'}
                     </Button>
                 );
@@ -27,8 +25,7 @@ class Log extends Component {
                     events[logData.periodKey] && (
                     events[logData.periodKey][logData.eventKey] && (
                         <Button color='link' name='Event'
-                                onClick={() => this.props.changeData(<Components.EventTimeline
-                                    timeKey={logData.periodKey} superTimeKey={logData.periodKey}/>, 'display')}>
+                                onClick={() => changeTimeline('Event', logData.periodKey, logData.periodKey)}>
                             {events[logData.periodKey][logData.eventKey].title ? events[logData.periodKey][logData.eventKey].title : 'untitled'}
                         </Button>
                     )));
@@ -41,8 +38,7 @@ class Log extends Component {
                     scenes[logData.eventKey] && (
                     scenes[logData.eventKey][logData.sceneKey] && (
                         <Button color='link' name='Event'
-                                onClick={() => this.props.changeData(<Components.SceneTimeline
-                                    timeKey={logData.eventKey} superTimeKey={logData.periodKey}/>, 'display')}>
+                                onClick={() => changeTimeline('Scene', logData.eventKey, logData.periodKey)}>
                             {scenes[logData.eventKey][logData.sceneKey].title ? scenes[logData.eventKey][logData.sceneKey].title : 'untitled'}
                         </Button>
                     )))));
@@ -90,7 +86,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({changeData}, dispatch);
+    return bindActionCreators({changeTimeline}, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Log);

@@ -1,20 +1,24 @@
 import React, {Component} from 'react';
 import * as Components from './index';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
+import {changeData} from "../actions";
 
-export default class Selector extends Component {
+class Selector extends Component {
     state = {dropdownOpen: false};
 
     handleClick = (event) => {
+        const {changeData} = this.props;
         switch (event.target.value) {
             case 'Palette':
-                this.props.handleShow(<Components.Palette/>);
+                changeData(<Components.Palette/>, 'show');
                 break;
             case 'Log':
-                this.props.handleShow(<Components.Log/>);
+                changeData(<Components.Log/>, 'show');
                 break;
             case 'hide':
-                this.props.handleShow(false);
+                changeData(false, 'show');
                 break;
             default:
                 break;
@@ -32,10 +36,24 @@ export default class Selector extends Component {
                     <DropdownItem value='hide' onClick={this.handleClick}>Hide</DropdownItem>
                     <DropdownItem value='Log' onClick={this.handleClick}>Log</DropdownItem>
                     <DropdownItem value='Palette' onClick={this.handleClick}>Palette</DropdownItem>
-
                 </DropdownMenu>
             </ButtonDropdown>
         );
     }
 }
+
+
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        periods: state.periods,
+        events: state.events,
+    };
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({changeData}, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Selector);
 

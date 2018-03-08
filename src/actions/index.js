@@ -1,11 +1,11 @@
 import {db} from '../firestore/db';
 
-const localData = ['user', 'channel', 'display', 'show', 'timeScale', 'timeKey', 'superTimeKey'];
+const localData = ['user', 'channel', 'show', 'deleteConfirm'];
 
 export const loadData = () => {
     return (dispatch, getState) => {
         const channel = getState().channel;
-        let dataTypes = ['periods', 'events', 'scenes', 'overview', 'palette', 'logs'];
+        let dataTypes = ['periods', 'events', 'scenes', 'overview', 'palette', 'logs', 'players'];
         dataTypes.forEach((type, index) => {
             db.doc(`channel/${channel}/data/${type}/`).onSnapshot((doc) => {
                 if (doc.exists) dispatch({type: `${type}_Changed`, payload: doc.data()});

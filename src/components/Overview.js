@@ -11,7 +11,7 @@ class Overview extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        this.setState({text: nextProps.overview.text});
+        if (!this.state.edit) this.setState({text: nextProps.overview.text});
     }
 
     handleChange = (event) => {

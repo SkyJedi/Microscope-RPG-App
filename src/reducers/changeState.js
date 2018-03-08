@@ -35,6 +35,11 @@ export const periods = (state = initialState.periods, action) => {
     return state;
 };
 
+export const players = (state = null, action) => {
+    if (action.type === 'players_Changed') return action.payload;
+    return state;
+};
+
 export const scenes = (state = null, action) => {
     if (action.type === 'scenes_Changed') return action.payload;
     return state;

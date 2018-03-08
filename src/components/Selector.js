@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as Components from './index';
+import {Log, Palette, Players} from './index';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
@@ -12,10 +12,13 @@ class Selector extends Component {
         const {changeData} = this.props;
         switch (event.target.value) {
             case 'Palette':
-                changeData(<Components.Palette/>, 'show');
+                changeData(<Palette/>, 'show');
                 break;
             case 'Log':
-                changeData(<Components.Log/>, 'show');
+                changeData(<Log/>, 'show');
+                break;
+            case 'Players':
+                changeData(<Players/>, 'show');
                 break;
             case 'hide':
                 changeData(false, 'show');
@@ -36,6 +39,7 @@ class Selector extends Component {
                     <DropdownItem value='hide' onClick={this.handleClick}>Hide</DropdownItem>
                     <DropdownItem value='Log' onClick={this.handleClick}>Log</DropdownItem>
                     <DropdownItem value='Palette' onClick={this.handleClick}>Palette</DropdownItem>
+                    <DropdownItem value='Players' onClick={this.handleClick}>Players</DropdownItem>
                 </DropdownMenu>
             </ButtonDropdown>
         );

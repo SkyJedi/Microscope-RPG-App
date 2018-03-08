@@ -20,7 +20,7 @@ class Log extends Component {
                 );
                 break;
             case 'addEvent':
-                newObj.text += ` added a Event:`;
+                newObj.text += ` added an Event:`;
                 newObj.link = periods[logData.periodKey] && (
                     events[logData.periodKey] && (
                     events[logData.periodKey][logData.eventKey] && (

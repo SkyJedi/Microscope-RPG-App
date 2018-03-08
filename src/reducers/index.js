@@ -9,6 +9,7 @@ const allReducers = combineReducers({
     overview: changeState.overview,
     palette: changeState.palette,
     periods: changeState.periods,
+    players: changeState.players,
     scenes: changeState.scenes,
     show: changeState.show,
     superTimeKey: changeState.superTimeKey,

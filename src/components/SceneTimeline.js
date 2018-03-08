@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Button, ButtonGroup, Col, Row} from 'reactstrap';
-import {TimeCard} from './index';
+import {DeleteConfirmModal, TimeCard} from './index';
 import {changeData} from "../actions";
 
 
 class SceneTimeline extends Component {
+    state = {deleteConfirm: false};
 
     addCard = (event) => {
         const {timeKey, scenes, superTimeKey} = this.props;
@@ -31,16 +32,17 @@ class SceneTimeline extends Component {
         }, 'logs')
     };
 
-    deleteCard = (event) => {
+    deleteCard = (deleteKey) => {
         const {timeKey, scenes} = this.props;
         let newObject = {...scenes};
-        let position = newObject[timeKey][event.target.name].position;
+        let position = newObject[timeKey][deleteKey].position;
         Object.keys(newObject[timeKey]).forEach((key) => {
             if (newObject[timeKey][key].position > position) newObject[timeKey][key].position--
         });
         if (1 >= Object.keys(newObject[timeKey]).length) newObject[timeKey] = '';
-        else delete newObject[timeKey][event.target.name];
+        else delete newObject[timeKey][deleteKey];
         this.props.changeData(newObject, 'scenes', false);
+        this.setState({deleteConfirm: false});
     };
 
     render() {
@@ -67,13 +69,17 @@ class SceneTimeline extends Component {
                             <Button color='secondary' size='sm' className='px-1' name={-1}
                                     onClick={this.addCard}>←Add</Button>
                             }
-                            <Button color='danger' size='sm' className='px-1' name={key} onClick={this.deleteCard}>Delete
+                            <Button color='danger' size='sm' className='px-1' name={key}
+                                    onClick={() => this.setState({deleteConfirm: key})}>Delete
                                 ↑</Button>
                             <Button color='secondary' size='sm' className='px-1' name={eventScenes[key].position}
                                     onClick={this.addCard}>Add →</Button>
                         </ButtonGroup>
                     </Col>
                 )}
+                <DeleteConfirmModal type='Scene' handleConfirm={this.deleteCard}
+                                    deleteConfirm={this.state.deleteConfirm}
+                                    handleCancel={() => this.setState({deleteConfirm: false})}/>
             </Row>
         )
     }

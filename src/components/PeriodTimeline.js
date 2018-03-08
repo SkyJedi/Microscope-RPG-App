@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Button, ButtonGroup, Col, Row} from 'reactstrap';
-import {TimeCard} from './index';
+import {DeleteConfirmModal, TimeCard} from './index';
 import {changeData} from "../actions";
 
 class PeriodTimeline extends Component {
+    state = {deleteConfirm: false};
+
     componentDidMount() {
         this.props.changeData(this.props.periods, 'periods')
     };
@@ -29,14 +31,15 @@ class PeriodTimeline extends Component {
         }, 'logs')
     };
 
-    deleteCard = (event) => {
+    deleteCard = (deleteKey) => {
         let newObject = {...this.props.periods};
-        let position = newObject[event.target.name].position;
+        let position = newObject[deleteKey].position;
         Object.keys(newObject).forEach((key) => {
             if (newObject[key].position > position) newObject[key].position--
         });
-        delete newObject[event.target.name];
+        delete newObject[deleteKey];
         this.props.changeData(newObject, 'periods', false);
+        this.setState({deleteConfirm: false});
     };
 
     render() {
@@ -55,13 +58,17 @@ class PeriodTimeline extends Component {
                         <TimeCard time={periods[key]} timeKey={key} superTimeKey={key}/>
                         <ButtonGroup className='float-right'>
                             {(index !== 0 && index !== Object.keys(periods).length - 1) &&
-                            <Button color='danger' name={key} onClick={this.deleteCard}>Delete ↑</Button>}
+                            <Button color='danger' name={key} onClick={() => this.setState({deleteConfirm: key})}>Delete
+                                ↑</Button>}
                             {index !== Object.keys(periods).length - 1 &&
                             <Button color='secondary' name={periods[key].position}
                                     onClick={this.addCard}>Add →</Button>}
                         </ButtonGroup>
                     </Col>
                 )}
+                <DeleteConfirmModal type='Period' handleConfirm={this.deleteCard}
+                                    deleteConfirm={this.state.deleteConfirm}
+                                    handleCancel={() => this.setState({deleteConfirm: false})}/>
             </Row>
         )
     }

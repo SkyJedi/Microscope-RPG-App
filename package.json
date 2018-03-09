@@ -10,6 +10,7 @@
   "author": "SkyJedi",
   "license": "GPL-3.0",
   "dependencies": {
+    "ajv": "^6.2.1",
     "bootstrap": "^4.0.0",
     "firebase": "^4.10.1",
     "react": "^16.2.0",
@@ -19,7 +20,8 @@
     "react-scripts": "^1.1.1",
     "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

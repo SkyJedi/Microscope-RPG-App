@@ -4,6 +4,7 @@ export {default as Breadcrumbs} from './Breadcrumbs';
 export {default as Channel} from './Channel';
 export {default as DeleteConfirmModal} from './DeleteConfirmModal';
 export {default as EventTimeline} from './EventTimeline';
+export {default as Legacy} from './Legacy';
 export {default as Log} from './Log';
 export {default as Overview} from './Overview';
 export {default as Palette} from './Palette';

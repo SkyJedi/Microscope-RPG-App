@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeData} from '../actions';
-import {Button, Card, CardBody, CardFooter, CardHeader, Input, InputGroup, ListGroup, ListGroupItem} from 'reactstrap';
+import {Button, Card, CardBody, CardFooter, CardHeader, CardText, Input, InputGroup} from 'reactstrap';
 import {DeleteConfirmModal} from "./index";
 
 class Players extends Component {
@@ -38,31 +38,27 @@ class Players extends Component {
                     Players
                 </CardHeader>
                 <CardBody style={{overflowY: 'scroll'}}>
+
+                    {players &&
+                    Object.keys(players).map(key =>
+                        <CardText className='my-2' key={key}>
+                            {players[key].name}
+                            <Button size='sm' color='danger' name={key} className='align-self-end float-right'
+                                            onClick={() => this.setState({deleteConfirm: key})}>Delete</Button>
+                            <hr/>
+                        </CardText>
+                    )
+                    }
+
+                </CardBody>
+
+                <CardFooter>
                     <InputGroup>
                         <Input value={text} name='text'
                                placeholder='Player Name'
                                onChange={this.handleChange}/>
                         <Button onClick={this.handleSubmit}>Submit</Button>
                     </InputGroup>
-
-                    {players &&
-                    <ListGroup>
-                        {Object.keys(players).map(key =>
-                            <ListGroupItem className='text-dark mx-0 my-1 px-0 py-0' key={key}>
-                                <InputGroup>
-                                    <Input value={players[key].name} disabled/>
-                                    <Button color='danger' name={key} className='align-self-end'
-                                            onClick={() => this.setState({deleteConfirm: key})}>Delete</Button>
-                                </InputGroup>
-                            </ListGroupItem>
-                        )}
-                    </ListGroup>
-                    }
-
-                </CardBody>
-
-                <CardFooter>
-
                 </CardFooter>
                 <DeleteConfirmModal type='Player' handleConfirm={this.handleDelete}
                                     deleteConfirm={this.state.deleteConfirm}

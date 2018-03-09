@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeTimeline} from '../actions';
-import {Button, Card, CardBody, CardHeader, ListGroup, ListGroupItem} from 'reactstrap';
+import {Card, CardBody, CardHeader, CardText} from 'reactstrap';
 
 class Log extends Component {
 
@@ -14,9 +14,10 @@ class Log extends Component {
             case 'addPeriod':
                 newObj.text += ` added a Period:`;
                 newObj.link = periods[logData.periodKey] && (
-                    <Button color='link' name='Period' onClick={() => changeTimeline('Period', null, null)}>
+                    <a color='link' href='#' name='Period' className='py-0 text-light'
+                       onClick={() => changeTimeline('Period', null, null)}>
                         {periods[logData.periodKey] ? periods[logData.periodKey].title : 'untitled'}
-                    </Button>
+                    </a>
                 );
                 break;
             case 'addEvent':
@@ -24,10 +25,10 @@ class Log extends Component {
                 newObj.link = periods[logData.periodKey] && (
                     events[logData.periodKey] && (
                     events[logData.periodKey][logData.eventKey] && (
-                        <Button color='link' name='Event'
-                                onClick={() => changeTimeline('Event', logData.periodKey, logData.periodKey)}>
+                        <a color='link' href='#' name='Event' className='py-0 text-light'
+                           onClick={() => changeTimeline('Event', logData.periodKey, logData.periodKey)}>
                             {events[logData.periodKey][logData.eventKey].title ? events[logData.periodKey][logData.eventKey].title : 'untitled'}
-                        </Button>
+                        </a>
                     )));
                 break;
             case 'addScene':
@@ -37,10 +38,10 @@ class Log extends Component {
                     events[logData.periodKey][logData.eventKey] && (
                     scenes[logData.eventKey] && (
                     scenes[logData.eventKey][logData.sceneKey] && (
-                        <Button color='link' name='Event'
-                                onClick={() => changeTimeline('Scene', logData.eventKey, logData.periodKey)}>
+                        <a color='link' href='#' name='Scene' className='py-0 text-light'
+                           onClick={() => changeTimeline('Scene', logData.eventKey, logData.periodKey)}>
                             {scenes[logData.eventKey][logData.sceneKey].title ? scenes[logData.eventKey][logData.sceneKey].title : 'untitled'}
-                        </Button>
+                        </a>
                     )))));
                 break;
             default:
@@ -58,16 +59,14 @@ class Log extends Component {
                 </CardHeader>
                 <CardBody style={{overflowY: 'scroll', whiteSpace: 'pre-line'}}>
                     {logs &&
-                    <ListGroup>
-                        {Object.keys(logs).sort((a, b) => {
+                    Object.keys(logs).sort((a, b) => {
                             return b - a
                         }).map((key) =>
-                            <ListGroupItem key={key} className='text-dark mx-0 my-1 px-0 py-0'>
-                                {this.makeLog(key).text}
+                        <CardText key={key} className='border-bottom py-2'>
+                            {this.makeLog(key).text} {'\n'}
                                 {this.makeLog(key).link}
-                            </ListGroupItem>
-                        )}
-                    </ListGroup>
+                        </CardText>
+                    )
                     }
                 </CardBody>
             </Card>

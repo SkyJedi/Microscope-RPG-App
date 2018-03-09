@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeData} from '../actions';
-import {Button, Card, CardBody, CardFooter, CardHeader, CardText, ListGroup, ListGroupItem} from 'reactstrap';
+import {Button, Card, CardBody, CardFooter, CardHeader, CardText, CardTitle} from 'reactstrap';
 
 class Palette extends Component {
     state = {
@@ -44,9 +44,9 @@ class Palette extends Component {
                     Palette
                 </CardHeader>
                 <CardBody style={{overflowY: 'scroll'}}>
-                    <CardText className='mb-0 font-weight-bold'>
+                    <CardTitle className='mb-0 font-weight-bold'>
                         Yes:
-                    </CardText>
+                    </CardTitle>
                     {edit ?
                         <textarea className='w-100'
                                   rows='5'
@@ -55,18 +55,17 @@ class Palette extends Component {
                                   value={yes}
                         />
                         : palette.yes ?
-                            <ListGroup>
-                                {palette.yes.split('\n').map(i =>
-                                    <ListGroupItem className='text-dark mx-0 my-1 px-0 py-0' key={i}>
-                                        {i}
-                                    </ListGroupItem>
-                                )}
-                            </ListGroup>
+                            palette.yes.split('\n').map(i =>
+                                <CardText className='my-2' key={i}>
+                                    •{'\t'}{i}
+                                </CardText>
+                            )
                             : ``
                     }
-                    <CardText className='mb-0 font-weight-bold'>
+                    <hr/>
+                    <CardTitle className='mb-0 font-weight-bold'>
                         No:
-                    </CardText>
+                    </CardTitle>
                     {edit ?
                         <textarea className='w-100'
                                   rows='5'
@@ -75,11 +74,11 @@ class Palette extends Component {
                                   value={no}
                         />
                         : palette.no ?
-                            <ListGroup>{palette.no.split('\n').map(i =>
-                                <ListGroupItem className='text-dark mx-0 my-1 px-0 py-0' key={i}>
-                                    {i}
-                                </ListGroupItem>)}
-                            </ListGroup>
+                            palette.no.split('\n').map(i =>
+                                <CardText className='my-2' key={i}>
+                                    •{'\t'}{i}
+                                </CardText>
+                            )
                             : ``
                     }
                 </CardBody>

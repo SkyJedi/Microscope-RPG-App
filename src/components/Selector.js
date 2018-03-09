@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Log, Palette, Players} from './index';
+import {Legacy, Log, Palette, Players} from './index';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
@@ -13,6 +13,9 @@ class Selector extends Component {
         switch (event.target.value) {
             case 'Palette':
                 changeData(<Palette/>, 'show');
+                break;
+            case 'Legacy':
+                changeData(<Legacy/>, 'show');
                 break;
             case 'Log':
                 changeData(<Log/>, 'show');
@@ -37,6 +40,7 @@ class Selector extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem value='hide' onClick={this.handleClick}>Hide</DropdownItem>
+                    <DropdownItem value='Legacy' onClick={this.handleClick}>Legacies</DropdownItem>
                     <DropdownItem value='Log' onClick={this.handleClick}>Log</DropdownItem>
                     <DropdownItem value='Palette' onClick={this.handleClick}>Palette</DropdownItem>
                     <DropdownItem value='Players' onClick={this.handleClick}>Players</DropdownItem>

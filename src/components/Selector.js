@@ -35,8 +35,8 @@ class Selector extends Component {
         return (
             <ButtonDropdown isOpen={this.state.dropdownOpen}
                             toggle={() => this.setState({dropdownOpen: !this.state.dropdownOpen})}>
-                <DropdownToggle caret size='sm' color='link'>
-                    Selector
+                <DropdownToggle size='lg' color='black' bgcolor='white' className='py-0' style={{fontSize: '1.8rem'}}>
+                    ☰
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem value='hide' onClick={this.handleClick}>Hide</DropdownItem>

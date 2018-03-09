@@ -12,6 +12,10 @@
     float: none;
 }
 
+.btn-wrap {
+    white-space: normal;
+}
+
 .h-90 {
     height: 90% !important;
 }

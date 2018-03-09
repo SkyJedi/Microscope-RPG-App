@@ -4,6 +4,7 @@ import * as changeState from './changeState';
 const allReducers = combineReducers({
     channel: changeState.channel,
     events: changeState.events,
+    gameData: changeState.gameData,
     loading: changeState.loading,
     logs: changeState.logs,
     overview: changeState.overview,

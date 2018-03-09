@@ -10,6 +10,11 @@ export const events = (state = null, action) => {
     return state;
 };
 
+export const gameData = (state = null, action) => {
+    if (action.type === 'gameData_Changed') return action.payload;
+    return state;
+};
+
 export const loading = (state = true, action) => {
     if (action.type === 'loading_Changed') return action.payload;
     return state;
